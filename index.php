@@ -1,7 +1,7 @@
 <?php
 require_once 'config/connect.php';
-$w = mysqli_query($connect, "SELECT * FROM `Объект`");
-$w = mysqli_fetch_all($budget);
+$s = mysqli_query($connect, "SELECT * FROM `Time of work`");
+$s = mysqli_fetch_all($s);
 ?>
 
 <!DOCTYPE html>
@@ -17,27 +17,42 @@ $w = mysqli_fetch_all($budget);
 <table>
     <tr>
       <th>id</th>
-      <th>Фамилия</th>
       <th>Имя</th>
+      <th>Фамилия</th>
       <th>Отчество</th>
-      <th>Номер картриджа</th>
-      <th>Номер принтера или МФУ</th>
-      <th>Комментарии и замечания по ходу выполнения (если требуются)</th>
+      <th>Дата рабочего дня</th>
+      <th>Отработанные часы</th>
       <th>&#9998;</th>
     </tr>
     <?php
-      foreach($budget as $budgets) {
+      foreach($s as $s) {
         ?>
           <tr>
-            <td><?= $w[0] ?></td>
-            <td><?= $w[1] ?></td>
-            <td><?= $w[2] ?></td>
-            <td><?= $w[3] ?></td> 
-            <td><?= $w[4] ?></td>
-            <td><?= $w[5] ?></td> 
-            <td><?= $w[6] ?></td>
-            <td><a href="update.php?id=<?= $w[0] ?>">Обновить</a></td>
+            <td><?= $s[0] ?></td>
+            <td><?= $s[1] ?></td>
+            <td><?= $s[2] ?></td>
+            <td><?= $s[3] ?></td> 
+            <td><?= $s[4] ?></td>
+            <td><?= $s[5] ?></td>
+            <td><a href="update.php?id=<?= $s[0] ?>">Обновить</a></td>
           </tr>
         <?php
       }
     ?>
+  </table>
+  <h2>Добавить часы для сотрудника/h2>
+  <form action="vendor/create.php" method="post">
+    <p>Имя</p>
+    <textarea name="name"></textarea>
+    <p>Фамилия</p>
+    <input type ="number" name= "videl">
+    <p>Отчество</p>
+    <input type="number" name="zatr">
+    <p>Дата рабочего дня</p>
+    <input type="number" name="ost">
+    <p>Отработанные часы</p>
+    <input type="number" name="dat">
+    <button type="submit">Добавить</button>
+  </form>
+</body>
+</html>
